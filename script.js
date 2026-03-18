@@ -13,8 +13,8 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // Dynamic Product Loading
-function loadProducts(category) {
-    const grid = document.querySelector('.products-grid');
+function loadProducts(category, targetGridId = null) {
+    const grid = targetGridId ? document.getElementById(targetGridId) : document.querySelector('.products-grid');
     if (!grid) return;
 
     let products;
@@ -135,10 +135,12 @@ window.openProductModal = function (name, price, imgSrc, details = "") {
     const isPriceString = typeof price === 'string' && price.includes('اسأل');
     const origin = window.location.origin || (window.location.protocol + '//' + window.location.host);
 
+    const imgFile = imgSrc.split('/').pop();
+
     modalBody.innerHTML = `
         <div class="modal-img">
             <div class="modal-img-wrap">
-                ${imgSrc.includes('<i') ? imgSrc : `<img src="${imgSrc.split('/').pop()}" onerror="this.src='${imgSrc.split('/').pop()}'">` }
+                ${imgSrc.includes('<i') ? imgSrc : `<img src="${imgFile}" onerror="this.src='${imgFile}'">` }
             </div>
         </div>
         <div class="modal-info">
@@ -150,7 +152,7 @@ window.openProductModal = function (name, price, imgSrc, details = "") {
                 ${price} ${isPriceString ? '' : 'جنيه'}
             </div>
             ${isPriceString ? `
-                <a class="btn btn-whatsapp" href="https://wa.me/201000556041?text=${encodeURIComponent('مرحباً، أريد الاستفسار عن سعر: ' + name + '\nرابط الصورة: ' + origin + '/' + imgSrc)}" target="_blank" style="width: 100%; padding: 15px;">
+                <a class="btn btn-whatsapp" href="https://wa.me/201000556041?text=${encodeURIComponent('مرحباً، أريد الاستفسار عن سعر: ' + name + '\nرابط الصورة: ' + origin + '/' + imgFile)}" target="_blank" style="width: 100%; padding: 15px;">
                     <i class="fa-brands fa-whatsapp"></i> اسأل عن السعر عبر واتساب
                 </a>
             ` : `
@@ -160,6 +162,7 @@ window.openProductModal = function (name, price, imgSrc, details = "") {
     `;
     modalOverlay.classList.add('show-modal');
 };
+
 
 window.closeModal = function () {
     const modal = document.getElementById('productModal');
@@ -297,7 +300,7 @@ function renderSearchResults(matches) {
             const clean = (s) => (s || '').toString().replace(/'/g, "\\'").replace(/\n/g, " ").trim();
             return `
                 <div class="search-result-item" id="search-item-${idx}" onclick="window.handleSearchClick('${clean(p.name)}', '${clean(p.price)}', '${clean(p.img)}', '${clean(p.details)}', this)">
-                    <img src="${p.img}" class="search-result-img">
+                    <img src="${p.img.split('/').pop()}" class="search-result-img">
                     <div class="search-result-info"><h4>${p.name}</h4><p>${p.price}</p></div>
                 </div>
             `;
