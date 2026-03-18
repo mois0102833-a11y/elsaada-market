@@ -46,8 +46,9 @@ function loadProducts(category, targetGridId = null) {
                 <div class="product-info">
                     <h3>${product.name}</h3>
                     <a class="btn btn-whatsapp" 
-                       href="https://wa.me/201000556041?text=${encodeURIComponent('مرحباً، أريد الاستفسار عن سعر: ' + product.name + '\nرابط الصورة: ' + origin + '/' + imgFile)}"
+                       href="https://wa.me/201000556041?text=${encodeURIComponent('مرحباً، أريد الاستفسار عن سعر: ' + product.name)}"
                        target="_blank"
+
                        onclick="event.stopPropagation()">
                         <i class="fa-brands fa-whatsapp"></i> اسأل عن السعر
                     </a>
@@ -151,10 +152,11 @@ window.openProductModal = function (name, price, imgSrc, details = "", originalI
             <div class="modal-price">
                 ${price} ${isPriceString ? '' : 'جنيه'}
             </div>
-            ${isPriceString ? `
-                <a class="btn btn-whatsapp" href="https://wa.me/201000556041?text=${encodeURIComponent('مرحباً، أريد الاستفسار عن سعر: ' + name + '\nرابط الصورة: ' + origin + '/' + imgFile)}" target="_blank" style="width: 100%; padding: 15px;">
+                      ${isPriceString ? `
+                <a class="btn btn-whatsapp" href="https://wa.me/201000556041?text=${encodeURIComponent('مرحباً، أريد الاستفسار عن سعر: ' + name)}" target="_blank" style="width: 100%; padding: 15px;">
                     <i class="fa-brands fa-whatsapp"></i> اسأل عن السعر عبر واتساب
                 </a>
+
             ` : `
                 <button class="btn btn-primary" style="width:100%; padding:15px;" onclick="addToCartModal('${name.replace(/'/g, "\\'")}', ${price})">أضف للسلة الآن</button>
             `}
