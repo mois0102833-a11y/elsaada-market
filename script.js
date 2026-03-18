@@ -34,18 +34,19 @@ function loadProducts(category) {
         const detailsEscaped = (product.details || '').replace(/'/g, "\\'");
         const price = product.price || 'اسأل عن السعر';
         const img = product.img || '';
+        const imgFile = img.split('/').pop(); // اسم الصورة بس من غير الفولدر
         const origin = window.location.origin || (window.location.protocol + '//' + window.location.host);
 
         return `
-            <div class="product-card reveal" onclick="window.openProductModal('${nameEscaped}', '${price}', '${img}', '${detailsEscaped}')">
+            <div class="product-card reveal" onclick="window.openProductModal('${nameEscaped}', '${price}', '${imgFile}', '${detailsEscaped}')">
                 <div class="product-img-container">
-                    <img src="${img}" alt="${product.name}" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <img src="${imgFile}" alt="${product.name}" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                     <i class="fa-solid fa-basket-shopping text-blue" style="display:none; font-size:50px;"></i>
                 </div>
                 <div class="product-info">
                     <h3>${product.name}</h3>
                     <a class="btn btn-whatsapp" 
-                       href="https://wa.me/201000556041?text=${encodeURIComponent('مرحباً، أريد الاستفسار عن سعر: ' + product.name + '\nرابط الصورة: ' + origin + '/' + img)}"
+                       href="https://wa.me/201000556041?text=${encodeURIComponent('مرحباً، أريد الاستفسار عن سعر: ' + product.name + '\nرابط الصورة: ' + origin + '/' + imgFile)}"
                        target="_blank"
                        onclick="event.stopPropagation()">
                         <i class="fa-brands fa-whatsapp"></i> اسأل عن السعر
@@ -137,7 +138,7 @@ window.openProductModal = function (name, price, imgSrc, details = "") {
     modalBody.innerHTML = `
         <div class="modal-img">
             <div class="modal-img-wrap">
-                ${imgSrc.includes('<i') ? imgSrc : `<img src="${origin}/${imgSrc}" onerror="this.src='${imgSrc}'">`}
+                ${imgSrc.includes('<i') ? imgSrc : `<img src="${imgSrc.split('/').pop()}" onerror="this.src='${imgSrc.split('/').pop()}'">` }
             </div>
         </div>
         <div class="modal-info">
