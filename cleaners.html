@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>المنظفات | السعادة ماركت</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="navbar" id="navbar-placeholder"></header>
+    <div id="sidebar-placeholder"></div>
+
+    <main class="main-content" style="min-height: 70vh;">
+        <section class="category-section container">
+            <div class="section-title">
+                <h2><i class="fa-solid fa-spray-can text-blue"></i> المنظفات ومنتجات العناية</h2>
+            </div>
+            <div class="products-grid">
+                <!-- Products will be loaded dynamically -->
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer" id="footer-placeholder"></footer>
+
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            if (window.loadProducts) window.loadProducts('cleaners');
+        });
+    </script>
+
+    <script src="products.js"></script>
+    <script src="components.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

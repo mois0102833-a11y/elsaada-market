@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>المعلبات | السعادة ماركت</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="navbar" id="navbar-placeholder"></header>
+    <div id="sidebar-placeholder"></div>
+
+    <main class="main-content" style="min-height: 70vh;">
+        <section class="category-section container" id="cannedCategoryView">
+            <div class="section-title">
+                <h2><i class="fa-solid fa-jar" id="cannedCategoryIcon" style="color:var(--primary-color);"></i> <span id="cannedCategoryTitle">قسم المعلبات والبقوليات</span></h2>
+                <button onclick="resetCannedChoice()" id="backBtn" class="btn" style="display:none; margin-top:10px; background:#f0f0f0;"><i class="fa-solid fa-arrow-right"></i> العودة للأقسام</button>
+            </div>
+            
+            <div id="cannedChoice" style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin-top: 30px; padding: 0 10px;">
+                <!-- Regular Canned Goods Card -->
+                <div class="product-card" style="flex: 1; min-width: 140px; max-width: 220px; cursor: pointer; border: 2px solid transparent; transition: 0.3s; margin: 0;" onclick="showCannedCategory('canned')">
+                    <div class="product-img-container" style="background-color: #fff0f0; height: 160px; display: flex; align-items: center; justify-content: center; overflow: hidden;">
+                        <img src="images/products/المعلبات/معلبات وبقوليات/clean_Screenshot_2026-03-16-02-07-09-88_78a6f4751b1640ad532826d040d8f96e.jpg" alt="معلبات وبقوليات" style="width: 100%; height: 100%; object-fit: contain; padding: 10px;">
+                    </div>
+                    <div class="product-info" style="text-align: center; padding: 15px 10px;">
+                        <h3 style="font-size: 1.1rem; color: #e74c3c; margin: 0;">معلبات وبقوليات</h3>
+                    </div>
+                </div>
+
+                <!-- Jam & Halawa Card -->
+                <div class="product-card" style="flex: 1; min-width: 140px; max-width: 220px; cursor: pointer; border: 2px solid transparent; transition: 0.3s; margin: 0;" onclick="showCannedCategory('jam_halawa')">
+                    <div class="product-img-container" style="background-color: #fce4ec; height: 160px; display: flex; align-items: center; justify-content: center; overflow: hidden;">
+                        <img src="images/products/المعلبات/مربى و حلاوة/clean_Screenshot_2026-03-16-02-04-36-37_78a6f4751b1640ad532826d040d8f96e.jpg" alt="مربى وحلاوة" style="width: 100%; height: 100%; object-fit: contain; padding: 10px;">
+                    </div>
+                    <div class="product-info" style="text-align: center; padding: 15px 10px;">
+                        <h3 style="font-size: 1.1rem; color: #ad1457; margin: 0;">مربى وحلاوة</h3>
+                    </div>
+                </div>
+
+                <!-- Oils & Ghee Card -->
+                <div class="product-card" style="flex: 1; min-width: 140px; max-width: 220px; cursor: pointer; border: 2px solid transparent; transition: 0.3s; margin: 0;" onclick="showCannedCategory('oils_ghee')">
+                    <div class="product-img-container" style="background-color: #fff9ea; height: 160px; display: flex; align-items: center; justify-content: center; overflow: hidden;">
+                        <img src="images/products/المعلبات/الزيوت والسمن/clean_Screenshot_2026-03-16-02-08-44-86_78a6f4751b1640ad532826d040d8f96e.jpg" alt="زيوت وسمن" style="width: 100%; height: 100%; object-fit: contain; padding: 10px;">
+                    </div>
+                    <div class="product-info" style="text-align: center; padding: 15px 10px;">
+                        <h3 style="font-size: 1.1rem; color: #f39c12; margin: 0;">زيوت وسمن</h3>
+                    </div>
+                </div>
+            </div>
+
+            <div class="products-grid" id="cannedProductsGrid" style="display:none; margin-top: 30px;">
+                <!-- Products will be loaded dynamically -->
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer" id="footer-placeholder"></footer>
+
+    <script>
+        function showCannedCategory(category) {
+            const grid = document.getElementById('cannedProductsGrid');
+            const choice = document.getElementById('cannedChoice');
+            const title = document.getElementById('cannedCategoryTitle');
+            const icon = document.getElementById('cannedCategoryIcon');
+            const backBtn = document.getElementById('backBtn');
+
+            choice.style.display = 'none';
+            grid.style.display = 'grid';
+            backBtn.style.display = 'inline-block';
+
+            if (category === 'jam_halawa') {
+                title.innerText = 'قسم المربى والحلاوة الطحينية';
+                icon.className = 'fa-solid fa-honey-pot';
+                icon.style.color = '#ad1457';
+            } else if (category === 'oils_ghee') {
+                title.innerText = 'قسم الزيوت والسمن';
+                icon.className = 'fa-solid fa-faucet-drip';
+                icon.style.color = '#f39c12';
+            } else {
+                title.innerText = 'قسم المعلبات والبقوليات';
+                icon.className = 'fa-solid fa-jar';
+                icon.style.color = '#e74c3c';
+            }
+
+            if (window.loadProducts) {
+                // We use a custom version of loadProducts for this page
+                loadProductsInto(category, 'cannedProductsGrid');
+            }
+        }
+
+        function resetCannedChoice() {
+            document.getElementById('cannedChoice').style.display = 'flex';
+            document.getElementById('cannedProductsGrid').style.display = 'none';
+            document.getElementById('backBtn').style.display = 'none';
+            document.getElementById('cannedCategoryTitle').innerText = 'قسم المعلبات والبقوليات';
+            document.getElementById('cannedCategoryIcon').className = 'fa-solid fa-jar';
+            document.getElementById('cannedCategoryIcon').style.color = 'var(--primary-color)';
+        }
+
+        function loadProductsInto(category, gridId) {
+            const grid = document.getElementById(gridId);
+            if (!grid) return;
+
+            const products = window.productsData.filter(p => p.category === category);
+
+            if (products.length === 0) {
+                grid.innerHTML = '<div style="text-align:center; grid-column: 1/-1; padding: 50px;">قريباً...</div>';
+                return;
+            }
+
+            grid.innerHTML = products.map(product => {
+                const nameEscaped = (product.name || '').replace(/'/g, "\\'");
+                const detailsEscaped = (product.details || '').replace(/'/g, "\\'");
+                const price = product.price || 'اسأل عن السعر';
+                const img = product.img || '';
+                const origin = window.location.origin || (window.location.protocol + '//' + window.location.host);
+                
+                return `
+                    <div class="product-card reveal" onclick="window.openProductModal('${nameEscaped}', '${price}', '${img}', '${detailsEscaped}')">
+                        <div class="product-img-container">
+                            <img src="${img}" alt="${product.name}" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <i class="fa-solid fa-basket-shopping text-blue" style="display:none; font-size:50px;"></i>
+                        </div>
+                        <div class="product-info">
+                            <h3>${product.name}</h3>
+                            <a class="btn btn-whatsapp" 
+                               href="https://wa.me/201000556041?text=${encodeURIComponent('مرحباً، أريد الاستفسار عن سعر: ' + product.name + '\nرابط الصورة: ' + origin + '/' + img)}"
+                               target="_blank"
+                               onclick="event.stopPropagation()">
+                                <i class="fa-brands fa-whatsapp"></i> اسأل عن السعر
+                            </a>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+    </script>
+
+    <script src="products.js"></script>
+    <script src="components.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

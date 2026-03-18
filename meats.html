@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>اللحوم | السعادة ماركت</title>
+    <!-- Google Fonts: Cairo -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Header & Navbar -->
+    <header class="navbar">
+        <div class="container nav-container">
+            <!-- Logo -->
+            <a href="index.html" class="logo">
+                <img src="images/logo.png" alt="سوبر ماركت السعادة" class="logo-img">
+                <span>السعادة ماركت</span>
+            </a>
+
+            <!-- Search Container -->
+            <div class="search-container">
+                <div class="search-bar">
+                    <input type="text" placeholder="ابحث في اللحوم..." id="searchInput">
+                    <button id="searchBtn"><i class="fa-solid fa-magnifying-glass"></i></button>
+                </div>
+            </div>
+
+            <!-- Cart Icon -->
+            <div class="cart-icon-container" id="cartToggleBtn">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span class="cart-count" id="cartCount">0</span>
+            </div>
+        </div>
+
+        <!-- Categories Navigation -->
+        <nav class="categories-nav">
+            <div class="container categories-container">
+                <div class="nav-arrow nav-arrow-left"><i class="fa-solid fa-chevron-left"></i></div>
+                <div class="categories-list">
+                    <a href="index.html"><i class="fa-solid fa-house"></i> الرئيسية</a>
+                    <a href="meats.html" class="active"><i class="fa-solid fa-drumstick-bite"></i> اللحوم</a>
+                    <a href="drinks.html"><i class="fa-solid fa-glass-water"></i> المشروبات</a>
+                    <a href="snacks.html"><i class="fa-solid fa-cookie-bite"></i> السناكس</a>
+                    <a href="dairy.html"><i class="fa-solid fa-cow"></i> الجبن والالبان</a>
+                    <a href="kahk.html"><i class="fa-solid fa-bread-slice"></i> الكحك والبسكوت</a>
+                    <a href="cleaners.html"><i class="fa-solid fa-spray-can"></i> المنظفات</a>
+                    <a href="contact.html"><i class="fa-solid fa-headset"></i> التواصل</a>
+                </div>
+                <div class="nav-arrow nav-arrow-right"><i class="fa-solid fa-chevron-right"></i></div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Shopping Cart Sidebar -->
+    <div class="cart-overlay" id="cartOverlay"></div>
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h2>سلة المشتريات</h2>
+            <button class="close-btn" id="closeCartBtn"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="cart-items" id="cartItemsContainer"></div>
+        <div class="cart-footer">
+            <div class="cart-total">الإجمالي: <span id="cartTotalPrice">0</span> جنيه</div>
+            <button class="btn btn-primary checkout-btn" onclick="checkoutWhatsApp()">إتمام الطلب عبر واتساب <i class="fa-brands fa-whatsapp"></i></button>
+        </div>
+    </div>
+
+    <!-- Main Content Area -->
+    <main class="main-content" style="min-height: 70vh;">
+        <section class="category-section container">
+            <div class="section-title">
+                <h2><i class="fa-solid fa-drumstick-bite text-red"></i> اللحوم الطازجة والشهية</h2>
+            </div>
+            <div class="products-grid" id="meatsGrid">
+                <!-- Products will be loaded dynamically -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Page Specific Script -->
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            if (window.loadProducts) {
+                window.loadProducts('meats');
+            }
+        });
+    </script>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-content">
+            <div class="footer-col">
+                <a href="index.html" class="logo footer-logo">
+                    <img src="images/logo.png" alt="سوبر ماركت السعادة" class="logo-img">
+                    <span>السعادة ماركت</span>
+                </a>
+                <p>منتجاتنا طازجة ومختارة بعناية لضمان سعادة عائلتك.</p>
+            </div>
+            <div class="footer-col contact-info" id="contact">
+                <h3>تواصل معنا</h3>
+                <ul>
+                    <li><i class="fa-solid fa-phone"></i> +20 122 957 9596</li>
+                    <li><a href="https://wa.me/201229579596" target="_blank"><i class="fa-brands fa-whatsapp"></i> خدمة العملاء عبر واتساب</a></li>
+                    <li><a href="https://maps.app.goo.gl/gzSHnhtvdsL46KBx9" target="_blank"><i class="fa-solid fa-location-dot"></i> محافظة البحيرة، مركز أبو حمص، قرية قافلة</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom"><p>&copy; 2026 السعادة ماركت.</p></div>
+    </footer>
+
+    <script src="products.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

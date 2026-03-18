@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>المشروبات | السعادة ماركت</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="navbar" id="navbar-placeholder"></header>
+    <div id="sidebar-placeholder"></div>
+
+    <main class="main-content" style="min-height: 70vh;">
+        <section class="category-section container">
+            <div class="section-title">
+                <h2><i class="fa-solid fa-glass-water text-blue"></i> قسم المشروبات</h2>
+                <p style="color: var(--text-light); margin-top:10px;">اختر ما تفضل شربه الآن</p>
+            </div>
+            
+            <div id="drinksChoice" style="display: flex; gap: 15px; justify-content: center; margin-top: 30px; padding: 0 10px;">
+                <!-- Cold Drinks Card -->
+                <div class="product-card" style="flex: 1; min-width: 140px; max-width: 220px; cursor: pointer; border: 2px solid transparent; transition: 0.3s; margin: 0;" onclick="showDrinkCategory('drinks')">
+                    <div class="product-img-container" style="background-color: #e3f2fd; height: 160px; display: flex; align-items: center; justify-content: center; overflow: hidden;">
+                        <img src="images/products/drinks/626935_main.jpg" alt="مشروبات غازية" style="width: 100%; height: 100%; object-fit: contain; padding: 10px;">
+                    </div>
+                    <div class="product-info" style="text-align: center; padding: 15px 10px;">
+                        <h3 style="font-size: 1.1rem; color: var(--primary-color); margin: 0;">بارد وغازي</h3>
+                        <p style="color: var(--text-light); margin-top: 5px; font-size: 0.85rem; display: none;">مياه وصودا</p>
+                    </div>
+                </div>
+
+                <!-- Hot Drinks Card -->
+                <div class="product-card" style="flex: 1; min-width: 140px; max-width: 220px; cursor: pointer; border: 2px solid transparent; transition: 0.3s; margin: 0;" onclick="showDrinkCategory('hot_drinks')">
+                    <div class="product-img-container" style="background-color: #fff3e0; height: 160px; display: flex; align-items: center; justify-content: center; overflow: hidden;">
+                        <img src="images/products/drinks/مشروبات ساخنه/clean_Screenshot_2026-03-16-02-19-47-78_78a6f4751b1640ad532826d040d8f96e.jpg" alt="مشروبات ساخنة" style="width: 100%; height: 100%; object-fit: contain; padding: 10px;">
+                    </div>
+                    <div class="product-info" style="text-align: center; padding: 15px 10px;">
+                        <h3 style="font-size: 1.1rem; color: #d84315; margin: 0;">مشروبات ساخنة</h3>
+                        <p style="color: var(--text-light); margin-top: 5px; font-size: 0.85rem; display: none;">شاي وبن</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="drinksGridContainer" style="display: none;">
+                <div style="margin-bottom: 30px; display: flex; align-items: center; gap: 15px;">
+                    <button class="btn btn-light" onclick="resetDrinksChoice()" style="padding: 8px 15px;">
+                        <i class="fa-solid fa-arrow-right"></i> رجوع للخيارات
+                    </button>
+                    <h3 id="currentCategoryTitle" style="margin: 0;"></h3>
+                </div>
+                <div class="products-grid">
+                    <!-- Products will be loaded dynamically -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer" id="footer-placeholder"></footer>
+
+    <script>
+        function showDrinkCategory(category) {
+            const choice = document.getElementById('drinksChoice');
+            const gridContainer = document.getElementById('drinksGridContainer');
+            const title = document.getElementById('currentCategoryTitle');
+            
+            choice.style.display = 'none';
+            gridContainer.style.display = 'block';
+            
+            if (category === 'drinks') {
+                title.innerHTML = '<i class="fa-solid fa-bottle-water text-blue"></i> المشروبات الغازية والباردة';
+            } else {
+                title.innerHTML = '<i class="fa-solid fa-mug-hot" style="color: #d84315;"></i> المشروبات الساخنة';
+            }
+            
+            if (window.loadProducts) window.loadProducts(category);
+        }
+
+        function resetDrinksChoice() {
+            const choice = document.getElementById('drinksChoice');
+            const gridContainer = document.getElementById('drinksGridContainer');
+            
+            choice.style.display = 'flex';
+            gridContainer.style.display = 'none';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            // Initial view is just the choice cards
+        });
+    </script>
+
+    <script src="products.js"></script>
+    <script src="components.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
