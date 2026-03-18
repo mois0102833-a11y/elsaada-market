@@ -3,7 +3,7 @@ const supermarketComponents = {
         <div class="container nav-container">
             <!-- Logo -->
             <a href="index.html" class="logo">
-                <img src="images/logo.png" alt="سوبر ماركت السعادة" class="logo-img">
+                <img src="logo.png" alt="سوبر ماركت السعادة" class="logo-img" onerror="this.src='images/logo.png'">
                 <span>السعادة ماركت</span>
             </a>
 
@@ -65,7 +65,7 @@ const supermarketComponents = {
         <div class="container footer-content">
             <div class="footer-col">
                 <a href="index.html" class="logo footer-logo">
-                    <img src="logo.png" alt="سوبر ماركت السعادة" class="logo-img">
+                    <img src="logo.png" alt="سوبر ماركت السعادة" class="logo-img" onerror="this.src='images/logo.png'">
                     <span>السعادة ماركت</span>
                 </a>
                 <p>نوفر لكم أفضل المنتجات الطازجه يوميًا بجودة عالية.

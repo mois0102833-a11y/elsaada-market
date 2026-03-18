@@ -38,9 +38,9 @@ function loadProducts(category, targetGridId = null) {
         const origin = window.location.origin || (window.location.protocol + '//' + window.location.host);
 
         return `
-            <div class="product-card reveal" onclick="window.openProductModal('${nameEscaped}', '${price}', '${imgFile}', '${detailsEscaped}')">
+            <div class="product-card reveal" onclick="window.openProductModal('${nameEscaped}', '${price}', '${imgFile}', '${detailsEscaped}', '${img}')">
                 <div class="product-img-container">
-                    <img src="${imgFile}" alt="${product.name}" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <img src="${imgFile}" alt="${product.name}" loading="lazy" onerror="if(this.src != '${img}') this.src='${img}'">
                     <i class="fa-solid fa-basket-shopping text-blue" style="display:none; font-size:50px;"></i>
                 </div>
                 <div class="product-info">
@@ -126,7 +126,7 @@ function ensureModalExists() {
     }
 }
 
-window.openProductModal = function (name, price, imgSrc, details = "") {
+window.openProductModal = function (name, price, imgSrc, details = "", originalImg = "") {
     ensureModalExists();
     const modalBody = document.getElementById('modalBody');
     const modalOverlay = document.getElementById('productModal');
@@ -140,7 +140,7 @@ window.openProductModal = function (name, price, imgSrc, details = "") {
     modalBody.innerHTML = `
         <div class="modal-img">
             <div class="modal-img-wrap">
-                ${imgSrc.includes('<i') ? imgSrc : `<img src="${imgFile}" onerror="this.src='${imgFile}'">` }
+                ${imgSrc.includes('<i') ? imgSrc : `<img src="${imgFile}" onerror="if(originalImg && this.src != originalImg) this.src=originalImg">` }
             </div>
         </div>
         <div class="modal-info">
